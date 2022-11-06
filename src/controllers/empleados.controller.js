@@ -39,6 +39,7 @@ export const createEmployees = async (req,res) => {
       })
   } catch (error) {
     res.status(500).json({message:'algo salio mal'})
+    console.log(error)
   }
  }
 
