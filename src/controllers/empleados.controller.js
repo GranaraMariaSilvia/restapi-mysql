@@ -26,16 +26,15 @@ export const getEmployee = async(req,res) =>{
 
 export const createEmployees = async (req,res) => {
   try {
-    const {nombre,apellido,salario,edad} = req.body
-    const [rows]= await pool.query('INSERT INTO empleados (nombre, apellido, salario,edad) VALUES(?,?,?)',
+    const {nombre,apellido,salario} = req.body
+    const [rows]= await pool.query('INSERT INTO empleados (nombre, apellido, salario) VALUES(?,?,?)',
       [nombre,apellido,salario])
      console.log(req.body)
       res.send({
        id: rows.insertId,
        nombre,
        apellido,
-       salario,
-        edad
+       salario  
       })
   } catch (error) {
     res.status(500).json({message:'algo salio mal'})
@@ -78,11 +77,7 @@ export const updateEmployee = async (req,res) =>{
   } catch (error) {
     res.status(500).json({message:'algo salio mal'})
   }
- 
-  
-    
-   
-  
+
     
   }
  
