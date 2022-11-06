@@ -27,8 +27,8 @@ export const getEmployee = async(req,res) =>{
 export const createEmployees = async (req,res) => {
   try {
     const {nombre,apellido,salario,edad} = req.body
-    const [rows]= await pool.query('INSERT INTO empleados (nombre, apellido, salario,edad) VALUES(?,?,?,?)',
-      [nombre,apellido,salario,edad])
+    const [rows]= await pool.query('INSERT INTO empleados (nombre, apellido, salario,edad) VALUES(?,?,?)',
+      [nombre,apellido,salario])
      console.log(req.body)
       res.send({
        id: rows.insertId,
@@ -62,10 +62,10 @@ export const deleteEmployee = async (req,res) =>{
 
 export const updateEmployee = async (req,res) =>{
   const{id}=req.params
-  const {nombre,apellido,salario,edad} =req.body
+  const {nombre,apellido,salario} =req.body
   try {
-    const [result] = await pool.query('UPDATE empleados SET nombre=IFNULL(?,nombre), apellido= IFNULL (?,apellido), salario=IFNULL (?,salario), edad=IFNULL (?,edad) WHERE id=?',
-    [nombre,apellido,salario,edad, id] )
+    const [result] = await pool.query('UPDATE empleados SET nombre=IFNULL(?,nombre), apellido= IFNULL (?,apellido), salario=IFNULL (?,salario) WHERE id=?',
+    [nombre,apellido,salario, id] )
 
     if(result.affectedRows === 0) return res.status(404),json({message:'empleado no encontrado'})
 
